@@ -1,0 +1,26 @@
+# Netlify configuration for the Conservation College landing site.
+
+[build]
+  publish = "."
+
+# Long-cache the image assets — they're versioned by filename and never change in place.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Sensible security headers for a static marketing site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Enforce the canonical domain — uncomment & edit once your custom domain is connected.
+# [[redirects]]
+#   from = "https://www.conservationcollege.com/*"
+#   to = "https://conservationcollege.com/:splat"
+#   status = 301
+#   force = true
